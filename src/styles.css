@@ -1,0 +1,533 @@
+/* ----------------------------------------------------
+   PASTEL DESIGN SYSTEM
+   ---------------------------------------------------- */
+:root {
+  /* Color Palette */
+  --bg-gradient: linear-gradient(135deg, #F3E8FF 0%, #FAE8FF 100%);
+  --card-bg: #FFFFFF;
+  --card-border: 1px solid rgba(109, 40, 217, 0.08);
+  
+  --primary-purple: #6D28D9;
+  --dark-purple: #292052;
+  --pink: #F472B6;
+  --soft-pink: #FCE7F3;
+  --lavender: #EDE9FE;
+  --soft-gray: #6B7280;
+  
+  --shadow-color: rgba(109, 40, 217, 0.04);
+  --box-shadow: 0 20px 48px var(--shadow-color);
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ----------------------------------------------------
+   BASE LAYOUT
+   ---------------------------------------------------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Quicksand', 'Fredoka', sans-serif;
+  color: var(--dark-purple);
+  background: var(--bg-gradient);
+  background-attachment: fixed;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+.page-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  z-index: 1;
+}
+
+/* ----------------------------------------------------
+   FLOATING DECORATIONS
+   ---------------------------------------------------- */
+.floating-decorations {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2; /* Layered above the white card */
+}
+
+.decor {
+  position: absolute;
+  user-select: none;
+}
+
+/* Floating animation definitions */
+@keyframes floatSlow1 {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(8deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@keyframes floatSlow2 {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(-12deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@keyframes floatSlow3 {
+  0% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-8px) scale(1.08); }
+  100% { transform: translateY(0px) scale(1); }
+}
+
+
+/* Star and Sparkle details */
+.decor.sparkle-star {
+  color: var(--pink);
+  font-size: 20px;
+  opacity: 0.6;
+}
+
+.decor.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #FCD34D;
+  opacity: 0.5;
+}
+
+/* Screen edge decoration positionings */
+.dec-4 { top: 14%; left: calc(50vw - 320px); animation: floatSlow3 5s infinite ease-in-out; }
+.dec-8 { top: 12%; right: calc(50vw - 320px); animation: floatSlow3 4s infinite ease-in-out; }
+
+.dec-9 { bottom: 42%; left: calc(50vw - 340px); animation: floatSlow2 5s infinite ease-in-out; }
+.dec-10 { bottom: 10%; left: calc(50vw - 300px); }
+.dec-11 { bottom: 35%; right: calc(50vw - 340px); }
+.dec-12 { bottom: 6%; right: calc(50vw - 300px); animation: floatSlow1 9s infinite ease-in-out; }
+
+/* ----------------------------------------------------
+   CONVERTER CARD
+   ---------------------------------------------------- */
+.converter-card {
+  background: var(--card-bg);
+  border: var(--card-border);
+  box-shadow: var(--box-shadow);
+  border-radius: 28px;
+  width: min(90vw, 476px);
+  padding: 40px 32px;
+  text-align: center;
+  transition: var(--transition);
+  animation: cardFadeIn 0.5s ease-out;
+  position: relative;
+  z-index: 1; /* Layered below the floating decorations */
+}
+
+@keyframes cardFadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ----------------------------------------------------
+   MASCOT AREA WITH GROUND SHADOW & HEART
+   ---------------------------------------------------- */
+.mascot-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.header-mascot-container {
+  position: relative;
+  display: inline-block;
+  animation: floatPig 4s ease-in-out infinite;
+}
+
+.mascot-img {
+  width: 128px;
+  height: 128px;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+.mascot-heart {
+  position: absolute;
+  top: 20px;
+  right: -6px;
+  color: var(--pink);
+  width: 15px;
+  height: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  animation: heartFloat 2s ease-in-out infinite;
+}
+
+@keyframes floatPig {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-7px) rotate(3deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@keyframes heartFloat {
+  0% { transform: translateY(0px) scale(1); opacity: 0.8; }
+  50% { transform: translateY(-4px) scale(1.15); opacity: 1; }
+  100% { transform: translateY(0px) scale(1); opacity: 0.8; }
+}
+
+/* Grounding shadow below piggy */
+.mascot-shadow {
+  width: 76px;
+  height: 7px;
+  background-color: rgba(109, 40, 217, 0.06);
+  border-radius: 50%;
+  margin-bottom: 10px;
+  animation: shadowPulse 4s ease-in-out infinite;
+}
+
+@keyframes shadowPulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(0.85); opacity: 0.4; }
+  100% { transform: scale(1); opacity: 0.8; }
+}
+
+/* ----------------------------------------------------
+   HEADING & SUBTITLE
+   ---------------------------------------------------- */
+.converter-title {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 29px;
+  font-weight: 700;
+  color: var(--dark-purple);
+  margin-bottom: 24px;
+  letter-spacing: -0.5px;
+}
+
+.converter-subtitle {
+  font-size: 14px;
+  color: var(--soft-gray);
+  margin-bottom: 26px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.title-sparkle {
+  color: var(--pink);
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* ----------------------------------------------------
+   LABELS
+   ---------------------------------------------------- */
+.section-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--dark-purple);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  padding-left: 2px;
+}
+
+/* ----------------------------------------------------
+   AMOUNT SECTION
+   ---------------------------------------------------- */
+.input-group {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.amount-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Cute dynamic currency badge inside input */
+.input-symbol-badge {
+  position: absolute;
+  left: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  pointer-events: none;
+  transition: var(--transition);
+}
+
+.amount-field {
+  width: 100%;
+  padding: 12px 16px 12px 54px; /* Room for left symbol badge */
+  font-size: 17px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  color: var(--dark-purple);
+  background-color: #FFFFFF;
+  border: 2px solid var(--lavender);
+  border-radius: 14px;
+  outline: none;
+  transition: var(--transition);
+}
+
+.amount-field:focus {
+  border-color: var(--pink);
+}
+
+/* ----------------------------------------------------
+   SELECTORS ROW & SWAP BUTTON
+   ---------------------------------------------------- */
+.selectors-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.select-container {
+  flex: 1;
+  text-align: left;
+}
+
+.custom-select-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.select-symbol-badge {
+  position: absolute;
+  left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  pointer-events: none;
+  z-index: 2;
+  transition: var(--transition);
+}
+
+.currency-select {
+  width: 100%;
+  padding: 11px 12px 11px 44px; /* Room for left badge */
+  font-size: 13px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  color: var(--dark-purple);
+  background-color: #FFFFFF;
+  border: 2px solid var(--lavender);
+  border-radius: 14px;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23292052' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 14px;
+  transition: var(--transition);
+}
+
+.currency-select:focus {
+  border-color: var(--pink);
+}
+
+/* Swap button wrapper with radiating sparks decoration */
+.swap-button-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.swap-lines-decor {
+  display: flex;
+  justify-content: center;
+  gap: 3px;
+  pointer-events: none;
+  margin-bottom: 3px; /* Naturally pushes the swap button down, avoiding negative absolute offsets */
+}
+
+.swap-lines-decor span {
+  width: 2px;
+  height: 6px;
+  background-color: var(--pink);
+  border-radius: 1px;
+  opacity: 0.8;
+}
+
+.swap-lines-decor span:nth-child(1) { transform: rotate(-30deg) translateY(2px); }
+.swap-lines-decor span:nth-child(2) { height: 7px; transform: translateY(-1px); }
+.swap-lines-decor span:nth-child(3) { transform: rotate(30deg) translateY(2px); }
+
+.swap-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, var(--pink) 0%, var(--primary-purple) 100%);
+  color: #FFFFFF;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(244, 114, 182, 0.35);
+  transition: var(--transition);
+  margin-bottom: 2px;
+}
+
+.swap-button:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 16px rgba(109, 40, 217, 0.4);
+}
+
+.swap-button:active {
+  transform: scale(0.95);
+}
+
+/* Dynamic color theme for currency badges matching image */
+.currency-badge-USD { background-color: #EDE9FE; color: #8B5CF6; }
+.currency-badge-INR { background-color: #FCE7F3; color: #EC4899; }
+.currency-badge-EUR { background-color: #E0F2FE; color: #0284C7; }
+.currency-badge-GBP { background-color: #F3E8FF; color: #7C3AED; }
+.currency-badge-JPY { background-color: #FEF3C7; color: #D97706; }
+
+/* ----------------------------------------------------
+   RESULT BOX WITH DASHED BORDER & WINGS
+   ---------------------------------------------------- */
+.result-section {
+  background: linear-gradient(135deg, var(--soft-pink) 0%, var(--lavender) 100%);
+  border: 2px dashed rgba(109, 40, 217, 0.25);
+  border-radius: 20px;
+  padding: 24px 20px;
+  transition: var(--transition);
+}
+
+.result-section:hover {
+  border-color: var(--pink);
+}
+
+.result-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--dark-purple);
+  letter-spacing: 1.2px;
+  margin-bottom: 8px;
+  opacity: 0.8;
+}
+
+.result-value {
+  font-family: 'Fredoka', sans-serif;
+  font-size: clamp(24px, 5.5vw, 36px);
+  font-weight: 700;
+  color: var(--primary-purple);
+  text-shadow: 1px 1px 0px #FFFFFF;
+  margin-bottom: 10px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Exchange Rate Info Pill with Info Icon */
+.rate-info-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--primary-purple);
+  background-color: #FFFFFF;
+  border: 1px solid rgba(109, 40, 217, 0.1);
+  padding: 5px 12px;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(109, 40, 217, 0.02);
+}
+
+.info-icon-badge {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid var(--primary-purple);
+  font-family: 'Fredoka', sans-serif;
+  font-size: 9px;
+  font-weight: bold;
+  color: var(--primary-purple);
+  line-height: 1;
+  text-align: center;
+  cursor: help;
+  user-select: none;
+  margin-left: 2px;
+}
+
+
+@media (max-width: 550px) {
+  .converter-card {
+    padding: 30px 20px;
+    border-radius: 22px;
+  }
+  
+  .converter-title {
+    font-size: 24px;
+  }
+  
+  .result-value {
+    font-size: 26px;
+  }
+  
+  .selectors-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .select-container {
+    width: 100%;
+  }
+  
+  .swap-button-wrapper {
+    align-self: center;
+  }
+  
+  .swap-button {
+    transform: rotate(90deg);
+  }
+  
+  .swap-button:hover {
+    transform: scale(1.08) rotate(90deg);
+  }
+  
+  .swap-lines-decor {
+    display: none;
+  }
+}
